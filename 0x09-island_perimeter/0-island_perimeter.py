@@ -1,21 +1,30 @@
+#!/usr/bin/python3
+"""
+Module used to
+"""
+
+
 def island_perimeter(grid):
-    if not grid or not grid[0]:
-        return 0
+    """[summary]
 
-    rows, cols = len(grid), len(grid[0])
+    Args:
+        grid ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
+
     perimeter = 0
+    m = len(grid)
+    n = len(grid[0])
 
-    for i in range(rows):
-        for j in range(cols):
+    for i in range(m):
+        for j in range(n):
             if grid[i][j] == 1:
-                perimeter += 4  # Each land cell contributes 4 to the perimeter
-
-                # Check left neighbor
-                if j > 0 and grid[i][j - 1] == 1:
-                    perimeter -= 2  # Deduct 2 if left neighbor is also land
-
-                # Check top neighbor
-                if i > 0 and grid[i - 1][j] == 1:
-                    perimeter -= 2  # Deduct 2 if top neighbor is also land
+                for x, y in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
+                    α, β = i + x, j + y
+                    # print(α, β)
+                    if α >= m or β >= n or α < 0 or β < 0 or grid[α][β] == 0:
+                        perimeter += 1
 
     return perimeter
